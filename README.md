@@ -19,3 +19,13 @@ There are 3 programmable chips.
 The EEPROM is re-programmable.  A routine was created to load the RAM with an updated image of the boot-rom, then the routine re-programs the EEPROM and rebooots.  - It is possible to "brick" the device, but it makes upgrades to the boot-rom easier.
    
    --end of edit, Jan-07-2023.--
+
+Okay, so I used "git add ." from the directory to upload...
+Then used "git commit" to actually upload...
+I saw the TCP log where the github address was accessed, did not capture data packets...
+The pictures and source are not here ...
+Currently looking at videos where people drag & drop to the web-browser ??
+Is there an example of using a Raspberry and command-line ??
+
+   --end of edit, Jan-09-2023, 09:30-am CST--
+   .
