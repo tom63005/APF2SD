@@ -1,0 +1,20 @@
+C1 = 0.1uF ceramic capacitor
+C2 = 22pf ceramic capacitor
+C3 = 22pf ceramic capacitor
+C4 = 10uF/16volt electrolytic capacitor
+C5 = 10uF/16volt electrolytic capacitor
+C6 = 10uF/16volt electrolytic capacitor
+C7 = 10uF/16volt electrolytic capacitor
+R1 = 10k ohm resistor
+X1 = 16 MHz crystal  (14.31818 MHz)
+U1 = 8k-by-8 bits SRAM  HM6264,   (v2a=HM62256)
+U2 = 8k-by-8 bits EEPROM  AT28c64b  (also fits 27c64)
+U3 = PLD  ATF20v8b  (v2a=22v10)
+U4 = MC10466  (also fits CD4066)
+U5 = SN74LS197  (using it as a 4-bit latch)
+U6 = ATMega328  (pulled from Arduino UNO, where just a USB cable can program it)
+--------
+Notes:
+(1) the ATF20v8b was chosen because my G540 will program it, no UV light is needed to erase.
+(2) the AT28C64b was chosen because there is no need for an erase cycle, the EEPROM is written to with just a "poke" and then "peek" until your value shows up.
+(3) J2 will not be used in production, but supplies an easy way to program the UNO chip outside of the $14 Arduino prototype board.

@@ -1,0 +1,81 @@
+Name     APF2SD201-20v8b ;
+PartNo   20v8b-10pu ;
+Date     10/15/2013 ;
+Revision 02 ;
+Designer Engineer ;
+Company  hobby ;
+Assembly None ;
+Location PCBoard ;
+Device   g20v8a ;
+
+/**************************************************/
+/*  Made to work with APF2SD\v2EPROM\SD2K.asm     */
+/*  08-27-2013 * Tom.Williams                     */
+/*  10-15-2013 * changes for MC14066BCP           */
+/*  12-02-2013 * RAM needs r/w after bank-switch  */
+/**************************************************/
+
+/**************************************************/
+/*  Operator Examples Description Precedence      */
+/*     !     !A          NOT        1             */
+/*     &     A & B       AND        2             */
+/*     #     A # B       OR         3             */
+/*     $     A $ B       XOR        4             */
+/**************************************************/
+
+/* *************** INPUT PINS *********************/
+/* PIN 1   = CLKIN  = TAP-1  if defined, then clock is used  */
+PIN 2   = A15   ; /*                                 */ 
+PIN 3   = A14   ; /*                                 */ 
+PIN 4   = A13   ; /*                                 */ 
+PIN 5   = A11   ; /*                                 */ 
+PIN 6   = A12   ; /*                                 */ 
+PIN 7   = PH2   ; /*  6800 CLK2                      */
+PIN 8   = BNKSW ; /*  Bank-Switch from ATMega328     */
+PIN 9   = TAP6  ; /*  left open for user             */
+PIN 10  = VMA   ; /*  6800 !VMA                      */ 
+PIN 11  = RW    ; /*  6800 R/!W  (Write=Low)         */ 
+/* PIN 12 = GND   (is 24-pin chip)                   */
+PIN 13  = OE    ; /*  tied to GND                    */ 
+PIN 14 = TAP5   ; /* No-Connect  (is an INPUT in SPLD mode) = TAP-5 */
+
+/* *************** OUTPUT PINS *********************/
+PIN 15  = RAMCS   ; /*  VMA*A15*(!A14)*A13*A12                           */ 
+PIN 16  = RAMRW   ; /*  R/W*A15*(!A14)*A13*A12                           */ 
+PIN 17  = RAMA13   ; /* Schmart TAP-4   (In or Out)                       */
+PIN 18  = EVBWR   ; /*  EVBRD  CH376 Eval Board Read (Active Low)        */
+PIN 19  = EVBRD   ; /*  EVBCS  CH376 Eval Board Chip Select (Active-Low) */
+PIN 20  = ROMRW   ; /*  EVBWR  CH376 Eval Board Write  (Active Low)      */
+PIN 21  = ROMOE  ; /* Schmart TAP-3                                     */
+PIN 22  = ROMCS   ; /*  RW*VMA*A15*(!A14)*(!A13)+RW*VMA*A15*(!A14)*A13*(!A12)  */ 
+PIN 23  = RAMA14    ; /* Schmart TAP-2  (is Input)                         */
+/* PIN 24 = Vcc   ------------------------------------------------------ */
+
+/* ************** LOGIC ***************************/
+x89 = VMA&A15&!A14&!A13     ; /* 100x = 8,9  (BOOT-ROM) */
+xAB = VMA&A15&!A14&A13      ; /* 101x = A,B  (RAM) */
+xC0 = VMA&A15&A14&!A13&!A12 ; /* 1100 = C     */
+xD0 = VMA&A15&A14&!A13&A12  ; /* 1101 = D     */
+xE0 = (VMA&A15&A14&A13&!A12)  ; /* 1110 = E     */
+xF0 = (VMA&A15&A14&A13&A12)   ; /* 1111 = F     */
+x20 = VMA&!A15&!A14&A13&!A12  ; /* 0010 = 2     */
+x40 = VMA&!A15&A14&!A13&!A12  ; /* 0100 = 4     */
+HI = VMA # !VMA;
+
+// RAMRW = !( (!RW&xAB&PH2&BNKSW) # (!RW&x89&PH2&!BNKSW) );  
+// RAMCS = !( (xAB&PH2&BNKSW) # (x89&PH2&!BNKSW) );
+RAMA13 = HI ;    /* this is the 8K version , RAMA14=input on the 20V8 */
+RAMRW = !((!RW&xAB&PH2&BNKSW)#(!RW&x89&PH2&!BNKSW));
+RAMCS = !((xAB&PH2&BNKSW)#(x89&PH2&!BNKSW));
+
+EVBRD = ( RW & xD0 & PH2 & !A11 ) ;    /* D000-D7FF - changed for MC14066BCP */
+EVBWR = !( !RW & xD0 & PH2 & A11 ) ;   /* D800-DFFF - data-latch = 74LS197 */
+
+// ROMCS = !( (x89&PH2&BNKSW) # (xAB&PH2&!BNKSW) );
+// ROMRW = !( (!RW&xAB&PH2&!BNKSW) );
+// ROMRW = !(!RW&xAB&PH2);     /* only write when is in A000-BFFF slot (WRITE = Low) */
+ROMRW = !(!RW&xAB&PH2&!BNKSW); /* only time we want this to be low is when BNKSW=lo&RW=low&xAB=hi */
+ROMCS = !((x89&PH2&BNKSW)#(xAB&PH2&!BNKSW));    /* chip-select depending on bank-switch */
+ROMOE = !((x89&PH2&BNKSW)#(xAB&PH2&!BNKSW))#RW; /* cannot output while being written-to */
+
+/* *********************************** */
