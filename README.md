@@ -26,5 +26,11 @@ The EEPROM is re-programmable.  A routine was created to load the RAM with an up
 
 Initial-Upload of files.
 
+URL Link to My Google-Sites Page : https://sites.google.com/site/apf2sd/home  
+
+URL Link to This Page :  https://github.com/tom63005/APF2SD/ 
+
+Note that when I uploaded the files, the comment says 2022 when it should say 2023. 
+
    --end of edit, Jan-11-2023.--
    .
