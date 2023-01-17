@@ -48,3 +48,17 @@ Note that when I uploaded the files, the comment says 2022 when it should say 20
    
    --end of edit, Jan-12-2023.--
 .
+
+- = - = - = -
+
+  Today,  Jan-16-2023 :: I have found my "reserve" PC-Boards (PCBs) ...  If you are interested, send me a ...
+     what does GOES ? .. GEO - Whazzat ?  ... Umm ... GHEO-Hub ?  .. Grit ?? CVS ?? 
+        .. Okay .. send me a personal IM on 
+            https://groups.io/g/APF-Consoles-and-Computers
+            
+whatever .. .. ??  - As I said in the -  Another ten years of silence will happen when - IF ....
+
+
+- = - = - = - = -
+
+.
