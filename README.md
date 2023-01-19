@@ -51,10 +51,10 @@ Note that when I uploaded the files, the comment says 2022 when it should say 20
 <br />
   Jan-16-2023 :: I located the original PC-Boards (about 30 PCBs in this stack) <br />
   ...  If you are interested in a board, send me a PM ... <br />
-  I paind to have these manufactured and paid an artist to create the EagleCAD Gerbers (under /src).
+  I paind to have these manufactured and paid an artist to create the EagleCAD Gerbers.
 <br />
-- = - = - = - <br />
+- = - = - = --<br />
 <br />
   Jan-19-2023 :: I found a snapshot of the source-code archived in 2013, before and after the cards were sent to Lance and Adam for "candidate for release" evaluation. - The cards worked for all catridges but needed a re-work of the PLD to block UFO from overwriting the stack on the 2nd time it was played.  I uploaded the "re-work" with the original git-hub create. The Arduino code is from the snapshot taken: Dec-2013.
 <br />
-- = - = - = -
+- = - = - = --
