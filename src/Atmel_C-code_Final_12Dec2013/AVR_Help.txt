@@ -1,0 +1,10 @@
+C:\Arduino\hardware\tools\avr\bin\avrdude.exe -C"C:\Arduino\hardware\tools\avr\etc\avrdude.conf" -v -v -v -v -patmega328p -cstk500v1 -PCOM25 -b19200 -D -Uflash:w:"C:\Users\TWilliams913\Documents\Arduino-upload\APF2SD8k_Atmel_main_loop.cpp.hex":i
+
+
+Command is this:
+ <arduino-ide-folder>/hardware/tools/avrdude -C<arduino-ide-folder>/hardware/tools/avrdude.conf -v -v -v -v -patmega328p -cstk500v1 -P<serial_device> -b115200 -D -Uflash:w:<full_path_to_hex>:i 
+where
+ <serial_device> could be /dev/ttyUSBx (linux), or COMx (win)
+ <full_path_to_hex> is the hex filename and location.
+ 
+If the command 
